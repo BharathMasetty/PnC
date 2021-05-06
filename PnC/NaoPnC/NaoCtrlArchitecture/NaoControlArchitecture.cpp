@@ -144,16 +144,16 @@ void NaoControlArchitecture::_InitializeParameters() {
   lfoot_trajectory_manager_->paramInitialization(
       cfg_["foot_trajectory_parameters"]);
 
-  lfoot_max_normal_force_manager_->setMaxFz(1500.);
-  rfoot_max_normal_force_manager_->setMaxFz(1500.);
+  lfoot_max_normal_force_manager_->setMaxFz(55.0);
+  rfoot_max_normal_force_manager_->setMaxFz(55.0);
   rfoot_contact_pos_hierarchy_manager_->setMaxGain(40.0);
-  rfoot_contact_pos_hierarchy_manager_->setMinGain(20.0);
+  rfoot_contact_pos_hierarchy_manager_->setMinGain(10.0);
   rfoot_contact_ori_hierarchy_manager_->setMaxGain(40.0);
-  rfoot_contact_ori_hierarchy_manager_->setMinGain(20.0);
+  rfoot_contact_ori_hierarchy_manager_->setMinGain(10.0);
   lfoot_contact_pos_hierarchy_manager_->setMaxGain(40.0);
-  lfoot_contact_pos_hierarchy_manager_->setMinGain(20.0);
+  lfoot_contact_pos_hierarchy_manager_->setMinGain(10.0);
   lfoot_contact_ori_hierarchy_manager_->setMaxGain(40.0);
-  lfoot_contact_ori_hierarchy_manager_->setMinGain(20.0);
+  lfoot_contact_ori_hierarchy_manager_->setMinGain(10.0);
 
   dcm_trajectory_manger_->paramInitialization(cfg_["dcm_planner_parameters"]);
 

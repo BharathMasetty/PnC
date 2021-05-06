@@ -225,6 +225,10 @@ void NaoWorldNode::customPreStep() {
   trq_cmd_.head(6).setZero();
   robot_->setForces(trq_cmd_);
   count_++;
+  Eigen::Isometry3d r_foot = robot_->getBodyNode("r_sole")->getWorldTransform();
+  Eigen::Isometry3d l_foot = robot_->getBodyNode("l_sole")->getWorldTransform();
+  // std::cout << "Right foot y location : " << r_foot.translation().y() << " Left foot y location : " << l_foot.translation().y() << std::endl; 
+
 
   // reset flags
   resetButtonFlags();
@@ -235,22 +239,45 @@ void NaoWorldNode::customPreStep() {
 void NaoWorldNode::GetContactSwitchData_(bool& rfoot_contact,
                                               bool& lfoot_contact) {
 
+  /*
+  // Get Sensor Wrench Data
+  Eigen::VectorXd rf_wrench = sensor_data_->rf_wrench;
+  Eigen::VectorXd lf_wrench = sensor_data_->lf_wrench;
+
+  // Local Z-Force Threshold
+  double force_threshold = 10;  // 10 Newtons ~ 1kg. If sensor detects this
+                                // force, then we are in contact
+
+  if (fabs(rf_wrench[5]) >= force_threshold) {
+    rfoot_contact = true;
+  } else {
+    rfoot_contact = false;
+  }
+
+  if (fabs(lf_wrench[5]) >= force_threshold) {
+    lfoot_contact = true;
+  } else {
+    lfoot_contact = false;
+  }*/
+
+ 
  // Query Foot Position
  Eigen::Isometry3d r_foot = robot_->getBodyNode("r_sole")->getWorldTransform();
  Eigen::Isometry3d l_foot = robot_->getBodyNode("l_sole")->getWorldTransform();
 
  // Check which one is greater than zero
- if (r_foot.translation().z() <= 0.005){
+ if (r_foot.translation().z() <= 0.0){
     rfoot_contact = true;
  } else {
     rfoot_contact = false;
  }
- if (l_foot.translation().z() <= 0.005){
+ if (l_foot.translation().z() <= 0.0){
     lfoot_contact = true;
  } else {
     lfoot_contact = false;
  }
  // std::cout << "Right foot z location : " << r_foot.translation().z() << " Left foot z location : " << l_foot.translation().z() << std::endl; 
+ 
 }
 
 void NaoWorldNode::SetParams_() {

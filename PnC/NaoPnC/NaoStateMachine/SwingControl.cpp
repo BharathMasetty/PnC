@@ -36,6 +36,8 @@ void SwingControl::firstVisit() {
   int footstep_index =
       val_ctrl_arch_->dcm_trajectory_manger_->current_footstep_index_;
 
+
+  // myUtils::pretty_print(val_ctrl_arch_->dcm_trajectory_manger_->footstep_list_[footstep_index], std::cout, "Next Foot step position");
   // Initialize the swing foot trajectory
   if (leg_side_ == LEFT_ROBOT_SIDE) {
     // Set Left Swing Foot Trajectory

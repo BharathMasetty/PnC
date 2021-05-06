@@ -109,7 +109,7 @@ void FootSE3TrajectoryManager::initializeSwingFootTrajectory(
   Eigen::Vector3d mid_swing_velocity =
       (swing_land_foot_.position - swing_init_foot_.position) / swing_duration_;
 
-  // myUtils::pretty_print(mid_swing_position, std::cout, "mid_swing_position");
+  myUtils::pretty_print(mid_swing_position, std::cout, "mid_swing_position");
   // myUtils::pretty_print(mid_swing_velocity, std::cout, "mid_swing_velocity");
 
   // Construct Position trajectories
@@ -125,7 +125,6 @@ void FootSE3TrajectoryManager::initializeSwingFootTrajectory(
   ang_vel_start.setZero();
   Eigen::Vector3d ang_vel_end;
   ang_vel_end.setZero();
-
   quat_hermite_curve_.initialize(swing_init_foot_.orientation, ang_vel_start,
                                  swing_land_foot_.orientation, ang_vel_end);
 }

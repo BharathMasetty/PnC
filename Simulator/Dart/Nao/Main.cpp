@@ -191,13 +191,13 @@ void _setInitialConfiguration(dart::dynamics::SkeletonPtr robot) {
   q[RHipPitch] =  -0.25;
   q[LKneePitch] =  0.5;
   q[RKneePitch] =  0.5;
-  q[LHipRoll] = 0;
-  q[RHipRoll] = 0;
+  q[LHipRoll] = 0.0;
+  q[RHipRoll] = 0.0;
   q[RHipYawPitch] = 0.0;
   q[LHipYawPitch] = 0.0;
-  q[LAnkleRoll] = 0;
+  q[LAnkleRoll] = 0.0;
   q[LAnklePitch] =  -0.25;
-  q[RAnkleRoll] = 0;
+  q[RAnkleRoll] = 0.0;
   q[RAnklePitch] =  -0.25;
   q[HeadYaw] = 0.0;
   q[HeadPitch] = 0.0;
