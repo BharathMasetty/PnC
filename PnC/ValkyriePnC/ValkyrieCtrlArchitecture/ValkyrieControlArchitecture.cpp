@@ -11,8 +11,12 @@ ValkyrieControlArchitecture::ValkyrieControlArchitecture(RobotSystem* _robot)
   sp_ = ValkyrieStateProvider::getStateProvider(robot_);
 
   // Initialize Main Controller
+
+  // these for nao
   taf_container_ = new ValkyrieTaskAndForceContainer(robot_);
   main_controller_ = new ValkyrieMainController(taf_container_, robot_);
+
+
   // Initialize Planner
   dcm_planner_ = new DCMPlanner();
 
@@ -44,6 +48,8 @@ ValkyrieControlArchitecture::ValkyrieControlArchitecture(RobotSystem* _robot)
       robot_, ValkyrieBodyNode::leftCOP_Frame,
       ValkyrieBodyNode::rightCOP_Frame);
 
+
+  // Make these for nao
   // Initialize states: add all states to the state machine map
   state_machines_[VALKYRIE_STATES::STAND] =
       new DoubleSupportStand(VALKYRIE_STATES::STAND, this, robot_);

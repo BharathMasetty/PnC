@@ -16,6 +16,8 @@ bool CoMxyzRxRyRzTask::_UpdateCommand(const Eigen::VectorXd& _pos_des,
                                       const Eigen::VectorXd& _acc_des) {
   Eigen::Quaternion<double> des_ori(_pos_des[0], _pos_des[1], _pos_des[2],
                                     _pos_des[3]);
+  
+
   Eigen::Quaternion<double> ori_act(
       robot_->getBodyNodeCoMIsometry(ValkyrieBodyNode::pelvis).linear());
   Eigen::Quaternion<double> quat_ori_err;
@@ -31,7 +33,7 @@ bool CoMxyzRxRyRzTask::_UpdateCommand(const Eigen::VectorXd& _pos_des,
     acc_des[i] = _acc_des[i];
   }
   // vel_act.head(3) =
-  // robot_->getBodyNodeCoMSpatialVelocity(DracoBodyNode::Torso).head(3);
+  // robot_->getBodyNodeCoMSpatialVelocity(DracoBodyNode::torso).head(3);
 
   // (X, Y, Z)
   for (int i = 0; i < 3; ++i) {
@@ -58,6 +60,7 @@ bool CoMxyzRxRyRzTask::_UpdateCommand(const Eigen::VectorXd& _pos_des,
 }
 
 bool CoMxyzRxRyRzTask::_UpdateTaskJacobian() {
+  
   Eigen::MatrixXd Jtmp =
       robot_->getBodyNodeCoMJacobian(ValkyrieBodyNode::pelvis);
   // (Rx, Ry, Rz)

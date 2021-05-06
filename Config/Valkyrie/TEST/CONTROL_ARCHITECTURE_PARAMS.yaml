@@ -49,7 +49,7 @@ task_parameters:
     w_task_ang_mom: 1e-6 
     w_task_pelvis: 10.0
     w_task_upper_body: 20.0
-    w_task_foot_contact: 40.0
+    w_task_foot_contact: 60.0
     w_task_foot_swing: 20.0 
 
     # Task Gains

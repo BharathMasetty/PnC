@@ -1,0 +1,17 @@
+servo_rate: 0.001 # !!this should be match with controller servo rate!!
+is_record: false
+show_joint_frame: false
+
+# Low-level Joint PD gains
+control_configuration:
+  kp: 2.0
+  kd: 0.002
+  hip_scale: 4.00
+  knee_scale: 12.00
+  elbow_scale: 1.50
+  ankle_scale: 8.00
+  shoulder_scale: 2.50
+  head_scale: 1.0
+
+ 
+

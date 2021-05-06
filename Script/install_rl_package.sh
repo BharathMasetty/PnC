@@ -65,7 +65,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # libzmq.so.5 (libc6,x86-64) => /usr/local/lib/libzmq.so.5
     # libzmq.so (libc6,x86-64) => /usr/local/lib/libzmq.so
     ############################################################
-fi
 
 echo "# ==================================================================="
 echo "# Install Gym"
@@ -78,3 +77,5 @@ echo "# ==================================================================="
 cd ${PATH_PACKAGE}/ReinforcementLearning/baselines && pip install -e . &&
 
 cd ${PATH_PACKAGE}
+
+fi

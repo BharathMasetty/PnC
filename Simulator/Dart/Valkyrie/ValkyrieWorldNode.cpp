@@ -16,6 +16,7 @@ ValkyrieWorldNode::ValkyrieWorldNode(const dart::simulation::WorldPtr& _world)
 
   trq_cmd_ = Eigen::VectorXd::Zero(n_dof_);
 
+  // These can be commented out for naos initially
   interface_ = new ValkyrieInterface();
   sensor_data_ = new ValkyrieSensorData();
   command_ = new ValkyrieCommand();
@@ -31,6 +32,7 @@ ValkyrieWorldNode::~ValkyrieWorldNode() {
   delete command_;
 }
 
+// Main while loop
 void ValkyrieWorldNode::customPreStep() {
   t_ = (double)count_ * servo_rate_;
 
@@ -80,6 +82,7 @@ void ValkyrieWorldNode::customPreStep() {
     interface_->interrupt->b_interrupt_button_k = true;
   }
 
+ /// -- comment below part
   interface_->getCommand(sensor_data_, command_);
 
   trq_cmd_.tail(n_dof_ - 6) = command_->jtrq;
@@ -95,7 +98,7 @@ void ValkyrieWorldNode::customPreStep() {
       trq_ub_.segment(Valkyrie::n_vdof, Valkyrie::n_adof), "clip trq in sim");
 
   trq_cmd_.head(6).setZero();
-
+//// --- Upto here
   robot_->setForces(trq_cmd_);
 
   count_++;
@@ -104,8 +107,11 @@ void ValkyrieWorldNode::customPreStep() {
   resetButtonFlags();
 }
 
+// Checking the contact -- reimplement with feet z position.
 void ValkyrieWorldNode::GetContactSwitchData_(bool& rfoot_contact,
                                               bool& lfoot_contact) {
+  
+
   // Get Sensor Wrench Data
   Eigen::VectorXd rf_wrench = sensor_data_->rf_wrench;
   Eigen::VectorXd lf_wrench = sensor_data_->lf_wrench;
@@ -147,6 +153,7 @@ void ValkyrieWorldNode::SetParams_() {
   }
 }
 
+// Can ignore this method.
 void ValkyrieWorldNode::GetForceTorqueData_() {
   Eigen::VectorXd rf_wrench = Eigen::VectorXd::Zero(6);
   Eigen::VectorXd lf_wrench = Eigen::VectorXd::Zero(6);

@@ -43,7 +43,7 @@ void ValkyrieTaskAndForceContainer::_InitializeTasks() {
   // Add all tasks initially. Remove later as needed.
   // task_list_.push_back(dcm_task_);
   task_list_.push_back(com_task_);
-  task_list_.push_back(ang_momentum_task_);
+  task_list_.push_back(ang_momentum_task_); // can ignore this
   task_list_.push_back(pelvis_ori_task_);
   task_list_.push_back(upper_body_task_);
 

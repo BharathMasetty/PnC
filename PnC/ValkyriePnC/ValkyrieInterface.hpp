@@ -13,8 +13,11 @@ class ValkyrieSensorData {
     qdot = Eigen::VectorXd::Zero(Valkyrie::n_adof);
     virtual_q = Eigen::VectorXd::Zero(Valkyrie::n_vdof);
     virtual_qdot = Eigen::VectorXd::Zero(Valkyrie::n_vdof);
+
+    // Ignore
     lf_wrench = Eigen::VectorXd::Zero(6);
     rf_wrench = Eigen::VectorXd::Zero(6);
+    
     rfoot_contact = false;
     lfoot_contact = false;
   }
@@ -30,6 +33,7 @@ class ValkyrieSensorData {
   bool lfoot_contact;
 };
 
+// Exactly same
 class ValkyrieCommand {
  public:
   ValkyrieCommand() {
@@ -43,6 +47,7 @@ class ValkyrieCommand {
   Eigen::VectorXd qdot;
   Eigen::VectorXd jtrq;
 };
+
 
 class ValkyrieInterface : public EnvInterface {
  protected:
@@ -63,5 +68,6 @@ class ValkyrieInterface : public EnvInterface {
  public:
   ValkyrieInterface();
   virtual ~ValkyrieInterface();
+  // Main method
   virtual void getCommand(void* _sensor_data, void* _command_data);
 };

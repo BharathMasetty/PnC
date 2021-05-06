@@ -5,6 +5,8 @@ add_subdirectory(RobotSystem)
 add_subdirectory(Filter)
 add_subdirectory(DracoPnC)
 add_subdirectory(ValkyriePnC)
+add_subdirectory(NaoPnC)
+
 
 file(GLOB pnc_headers "*.hpp")
 install(FILES ${pnc_headers} DESTINATION "${INSTALL_INCLUDE_DIR}/PnC")

@@ -37,7 +37,7 @@ bool DCMTask::_UpdateTaskJacobian() {
   Jt_.block(0, 0, 3, robot_->getNumDofs()) =
       Jtmp.block(3, 0, 3, robot_->getNumDofs());
 
-  // Replace Z Jacobian with pelvis.
+  // Replace Z Jacobian with pelvis. 
   Jtmp = robot_->getBodyNodeCoMJacobian(ValkyrieBodyNode::pelvis);
   Jt_.block(2, 0, 1, robot_->getNumDofs()) =
       Jtmp.block(5, 0, 1, robot_->getNumDofs());

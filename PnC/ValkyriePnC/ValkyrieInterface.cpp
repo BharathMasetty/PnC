@@ -21,7 +21,10 @@ ValkyrieInterface::ValkyrieInterface() : EnvInterface() {
 
   robot_ = new RobotSystem(
       6, THIS_COM "RobotModel/Robot/Valkyrie/ValkyrieSim_Dart.urdf");
-  // robot_->printRobotInfo();
+ // use this to make naodefinition.hpp
+  // makerobot_->printRobotInfo();
+  
+  // Make similar to Valkarie
   state_estimator_ = new ValkyrieStateEstimator(robot_);
   sp_ = ValkyrieStateProvider::getStateProvider(robot_);
 
@@ -40,6 +43,7 @@ ValkyrieInterface::ValkyrieInterface() : EnvInterface() {
 
   myUtils::color_print(myColor::BoldCyan, border);
 
+  // Ignore for now
   DataManager* data_manager = DataManager::GetDataManager();
   data_manager->RegisterData(&cmd_jpos_, VECT, "jpos_des", Valkyrie::n_adof);
   data_manager->RegisterData(&cmd_jvel_, VECT, "jvel_des", Valkyrie::n_adof);
@@ -58,6 +62,7 @@ void ValkyrieInterface::getCommand(void* _data, void* _command) {
   ValkyrieSensorData* data = ((ValkyrieSensorData*)_data);
 
   if (!Initialization_(data, cmd)) {
+    // Only implement 66.
     state_estimator_->Update(data);
     interrupt->processInterrupts();
     control_architecture_->getCommand(cmd);
@@ -89,6 +94,7 @@ void ValkyrieInterface::_ParameterSetting() {
     std::string test_name =
         myUtils::readParameter<std::string>(cfg, "test_name");
     if (test_name == "walking") {
+      // comment this out for nao.
       control_architecture_ = new ValkyrieControlArchitecture(robot_);
       delete interrupt;
       interrupt = new WalkingInterruptLogic(
@@ -115,6 +121,7 @@ bool ValkyrieInterface::Initialization_(ValkyrieSensorData* _sensor_data,
     test_initialized = true;
   }
   if (count_ < waiting_count_) {
+    // Set the waiting cout to 4 
     state_estimator_->Initialization(_sensor_data);
     DataManager::GetDataManager()->start();
     return true;
