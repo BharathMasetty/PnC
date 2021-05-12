@@ -129,34 +129,34 @@ void NaoWorldNode::customPreStep() {
   Eigen::VectorXd q = robot_->getPositions();
   Eigen::VectorXd v = robot_->getVelocities();
 
-  /*
+  
   // Head Joints
   for (int joint : HeadJointIndices){
     dart::dynamics::DegreeOfFreedom* dof = robot_->getDof(joint);
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
   }
 
   for (int joint : ShoulderJointIndices){
     dart::dynamics::DegreeOfFreedom* dof = robot_->getDof(joint);
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
   }
   
   for (int joint : ElbowJointIndices){
     dart::dynamics::DegreeOfFreedom* dof = robot_->getDof(joint);
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl; 
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl; 
   }
   
   for (int joint : HipJointIndices){
     dart::dynamics::DegreeOfFreedom* dof = robot_->getDof(joint);
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
     
   }
   
@@ -164,7 +164,7 @@ void NaoWorldNode::customPreStep() {
     dart::dynamics::DegreeOfFreedom* dof = robot_->getDof(joint);
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
   }
   
   for (int joint : AnkleJointIndices){
@@ -172,9 +172,9 @@ void NaoWorldNode::customPreStep() {
     // std::cout<<"Joint Index: " << joint << std::endl;
     trq_cmd_[joint] += head_scale_ * (kp_ * (command_->q[joint-6] - sensor_data_->q[joint-6]) + 
                                        kd_ * (command_->qdot[joint-6] - sensor_data_->qdot[joint-6]));
-    std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
+    //std::cout << dof->getName() << "---" << trq_cmd_[joint-6] << "---" <<  command_->q[joint-6] - sensor_data_->q[joint] << std::endl;
   }
-  */
+  
   
   
    // std::cout << "Joint Torque values ##################################" << std::endl;

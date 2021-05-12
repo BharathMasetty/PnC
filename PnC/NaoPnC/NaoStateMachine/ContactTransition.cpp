@@ -66,15 +66,21 @@ void ContactTransition::firstVisit() {
           val_ctrl_arch_->dcm_trajectory_manger_
               ->getInitialContactTransferTime() -
           val_ctrl_arch_->dcm_trajectory_manger_->getNormalForceRampDownTime();
+
     }
 
     // Recompute DCM Trajectories
     double t_walk_start = ctrl_start_time_;
     Eigen::Quaterniond torso_ori(
         robot_->getBodyNodeCoMIsometry(NaoBodyNode::torso).linear());
+    
+    if (val_ctrl_arch_->getPrevState() == NAO_STATES::BALANCE){
     val_ctrl_arch_->dcm_trajectory_manger_->initialize(
         t_walk_start, transfer_type, torso_ori, sp_->dcm, sp_->dcm_vel);
+    val_ctrl_arch_->dcm_trajectory_manger_->saveSolution(std::to_string(sp_->planning_id));
+    }
   }
+
 }
 
 void ContactTransition::_taskUpdate() {

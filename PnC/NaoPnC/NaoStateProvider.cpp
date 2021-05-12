@@ -19,7 +19,7 @@ NaoStateProvider::NaoStateProvider(RobotSystem* _robot) {
   ft_ori_inc = 0.;
   num_total_step = 0;
   num_residual_step = 0;
-
+  planning_id=0;
   num_step_copy = 0;
   phase_copy = 0;
   robot_ = _robot;

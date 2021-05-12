@@ -249,7 +249,7 @@ void DCMTrajectoryManager::resetIndexAndClearFootsteps() {
 
 void DCMTrajectoryManager::walkInPlace() {
   resetIndexAndClearFootsteps();
-  populateStepInPlace(1, robot_side_first_);
+  populateStepInPlace(5, robot_side_first_);
   alternateLeg();
 }
 void DCMTrajectoryManager::walkForward() {
@@ -609,6 +609,8 @@ void DCMTrajectoryManager::saveSolution(const std::string& file_name) {
     cfg["reference"]["com_vel"] = com_vel_ref;
     cfg["reference"]["vrp"] = vrp_ref;
     cfg["reference"]["time"] = t_traj;
+
+    std::cout << "com position ref : " << com_pos_ref << std::endl;
 
     std::string full_path = THIS_COM + std::string("ExperimentData/") +
                             file_name + std::string(".yaml");

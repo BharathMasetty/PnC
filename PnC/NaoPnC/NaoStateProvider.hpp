@@ -32,6 +32,7 @@ class NaoStateProvider {
 
   int num_step_copy;
   int phase_copy;
+  int planning_id;
 
   // API related variable
   double ft_length;

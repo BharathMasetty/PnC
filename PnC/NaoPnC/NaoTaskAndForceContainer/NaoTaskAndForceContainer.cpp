@@ -71,9 +71,9 @@ void NaoTaskAndForceContainer::_InitializeTasks() {
 }
 void NaoTaskAndForceContainer::_InitializeContacts() {
   rfoot_contact_ = new SurfaceContactSpec(
-      robot_, NaoBodyNode::r_sole, 0.135, 0.08, 0.9 / sqrt(2.0));
+      robot_, NaoBodyNode::r_sole, 0.15, 0.07, 0.9 / sqrt(2.0));
   lfoot_contact_ = new SurfaceContactSpec(
-      robot_, NaoBodyNode::l_sole, 0.135, 0.08, 0.9 / sqrt(2.0));
+      robot_, NaoBodyNode::l_sole, 0.15, 0.07, 0.9 / sqrt(2.0));
   dim_contact_ = rfoot_contact_->getDim() + lfoot_contact_->getDim();
   rfoot_max_z_ = 1500;
   lfoot_max_z_ = 1500;

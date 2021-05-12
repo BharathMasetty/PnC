@@ -1,11 +1,11 @@
  #include <PnC/NaoPnC/NaoCtrlArchitecture/NaoControlArchitecture.hpp>
-#include <PnC/NaoPnC/NaoStateMachine/DoubleSupportStand.hpp>
+#include <PnC/NaoPnC/NaoStateMachine/DoubleSupportShift.hpp>
 
-DoubleSupportStand::DoubleSupportStand(
+DoubleSupportShift::DoubleSupportShift(
     const StateIdentifier state_identifier_in,
     NaoControlArchitecture* _ctrl_arch, RobotSystem* _robot)
     : StateMachine(state_identifier_in, _robot) {
-  myUtils::pretty_constructor(2, "SM: Double Support Stand");
+  myUtils::pretty_constructor(2, "SM: Double Support Shift");
 
   // Set Pointer to Control Architecture
   nao_ctrl_arch_ = ((NaoControlArchitecture*)_ctrl_arch);
@@ -26,10 +26,10 @@ DoubleSupportStand::DoubleSupportStand(
   com_pos_target_ = Eigen::VectorXd::Zero(3);
 }
 
-DoubleSupportStand::~DoubleSupportStand() {}
+DoubleSupportShift::~DoubleSupportShift() {}
 
-void DoubleSupportStand::firstVisit() {
-  std::cout << "[Double Support Stand] Start" << std::endl;
+void DoubleSupportShift::firstVisit() {
+  std::cout << "[Double Support Shift] Start" << std::endl;
 
   ctrl_start_time_ = sp_->curr_time;
   // =========================================================================
@@ -44,7 +44,7 @@ void DoubleSupportStand::firstVisit() {
       robot_->getBodyNodeCoMIsometry(NaoBodyNode::r_sole)
           .translation();
   //std::cout << "DEBUG: initial foot position: \n" << lfoot_pos << "\n Right \n" << rfoot_pos << std::endl;
-  des_com_pos_ = 0.5 * (lfoot_pos + rfoot_pos) + com_pos_target_ ;
+  des_com_pos_ = lfoot_pos + com_pos_target_ ;
   //std::cout << "DEBUG: desired com position: \n" << des_com_pos_ << std::endl;
 
   _SetBspline(ini_com_pos_, des_com_pos_);
@@ -95,7 +95,7 @@ void DoubleSupportStand::firstVisit() {
       0.0, time_to_max_normal_force_);
 }
 
-void DoubleSupportStand::_taskUpdate() {
+void DoubleSupportShift::_taskUpdate() {
   // =========================================================================
   // Update CoM Task
   // =========================================================================
@@ -127,7 +127,7 @@ void DoubleSupportStand::_taskUpdate() {
   nao_ctrl_arch_->lfoot_trajectory_manager_->useCurrent();
 }
 
-void DoubleSupportStand::oneStep() {
+void DoubleSupportShift::oneStep() {
   state_machine_time_ = sp_->curr_time - ctrl_start_time_;
 
   // Compute and update new maximum reaction forces
@@ -139,21 +139,21 @@ void DoubleSupportStand::oneStep() {
   _taskUpdate();
 }
 
-void DoubleSupportStand::lastVisit() {}
+void DoubleSupportShift::lastVisit() {}
 
-bool DoubleSupportStand::endOfState() {
+bool DoubleSupportShift::endOfState() {
   if (state_machine_time_ > end_time_) {
-    // std::cout << "[DoubleSupportStand] State End" << std::endl;
+    // std::cout << "[DoubleSupportShift] State End" << std::endl;
     return true;
   }
   return false;
 }
 
-StateIdentifier DoubleSupportStand::getNextState() {
+StateIdentifier DoubleSupportShift::getNextState() {
   return NAO_STATES::BALANCE;
 }
 
-void DoubleSupportStand::_SetBspline(const Eigen::VectorXd st_pos,
+void DoubleSupportShift::_SetBspline(const Eigen::VectorXd st_pos,
                                      const Eigen::VectorXd des_pos) {
   // Trajectory Setup
   double init[9];
@@ -185,7 +185,7 @@ void DoubleSupportStand::_SetBspline(const Eigen::VectorXd st_pos,
   delete[] middle_pt;
 }
 
-void DoubleSupportStand::_GetBsplineTrajectory() {
+void DoubleSupportShift::_GetBsplineTrajectory() {
   double pos[3];
   double vel[3];
   double acc[3];
@@ -201,7 +201,7 @@ void DoubleSupportStand::_GetBsplineTrajectory() {
   }
 }
 
-void DoubleSupportStand::initialization(const YAML::Node& node) {
+void DoubleSupportShift::initialization(const YAML::Node& node) {
   try {
     myUtils::readParameter(node, "target_pos_duration", end_time_);
     myUtils::readParameter(node, "time_to_max_normal_force",

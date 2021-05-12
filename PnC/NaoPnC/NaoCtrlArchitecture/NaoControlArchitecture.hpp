@@ -15,6 +15,7 @@
 #include <PnC/NaoPnC/NaoStateMachine/ContactTransitionEnd.hpp>
 #include <PnC/NaoPnC/NaoStateMachine/DoubleSupportBalance.hpp>
 #include <PnC/NaoPnC/NaoStateMachine/DoubleSupportStand.hpp>
+#include <PnC/NaoPnC/NaoStateMachine/DoubleSupportShift.hpp>
 #include <PnC/NaoPnC/NaoStateMachine/SwingControl.hpp>
 #include <PnC/NaoPnC/NaoStateProvider.hpp>
 #include <PnC/NaoPnC/NaoTaskAndForceContainer/NaoTaskAndForceContainer.hpp>
@@ -29,6 +30,7 @@ constexpr int RL_SWING = 4;
 constexpr int LL_CONTACT_TRANSITION_START = 5;
 constexpr int LL_CONTACT_TRANSITION_END = 6;
 constexpr int LL_SWING = 7;
+constexpr int SHIFT = 8;
 };
 
 class NaoControlArchitecture : public ControlArchitecture {
@@ -43,6 +45,7 @@ class NaoControlArchitecture : public ControlArchitecture {
   YAML::Node cfg_;
 
   void _InitializeParameters();
+  void saveData();
   bool b_state_first_visit_;
 
  public:
