@@ -151,6 +151,7 @@ bool DoubleSupportStand::endOfState() {
 
 StateIdentifier DoubleSupportStand::getNextState() {
   return NAO_STATES::BALANCE;
+  // return NAO_STATES::SHIFT;
 }
 
 void DoubleSupportStand::_SetBspline(const Eigen::VectorXd st_pos,

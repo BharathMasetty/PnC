@@ -44,7 +44,7 @@ void DoubleSupportShift::firstVisit() {
       robot_->getBodyNodeCoMIsometry(NaoBodyNode::r_sole)
           .translation();
   //std::cout << "DEBUG: initial foot position: \n" << lfoot_pos << "\n Right \n" << rfoot_pos << std::endl;
-  des_com_pos_ = lfoot_pos + com_pos_target_ ;
+  des_com_pos_ = 0.5*lfoot_pos + com_pos_target_ ;
   //std::cout << "DEBUG: desired com position: \n" << des_com_pos_ << std::endl;
 
   _SetBspline(ini_com_pos_, des_com_pos_);

@@ -57,7 +57,7 @@ NaoControlArchitecture::NaoControlArchitecture(RobotSystem* _robot)
       new DoubleSupportBalance(NAO_STATES::BALANCE, this, robot_);
   
   state_machines_[NAO_STATES::SHIFT] = 
-      new DoubleSupportShift(NAO_STATES::SHIFT, this, robot_);
+     new DoubleSupportShift(NAO_STATES::SHIFT, this, robot_);
 
   state_machines_[NAO_STATES::RL_CONTACT_TRANSITION_START] =
       new ContactTransition(NAO_STATES::RL_CONTACT_TRANSITION_START,
