@@ -1,5 +1,6 @@
 #include <PnC/DracoPnC/DracoCtrlArchitecture/DracoCtrlArchitecture.hpp>
 #include <PnC/DracoPnC/DracoLogicInterrupt/WalkingInterruptLogic.hpp>
+#include <Utils/IO/IOUtilities.hpp>
 
 WalkingInterruptLogic::WalkingInterruptLogic(
     DracoControlArchitecture* _ctrl_arch)
@@ -20,7 +21,7 @@ void WalkingInterruptLogic::processInterrupts() {
     std::cout << "---------     Swing CoM     ---------" << std::endl;
     if (ctrl_arch_->getState() == DRACO_STATES::BALANCE) {
       double amp(0.03);
-      double freq(0.5);
+      double freq(0.4);
       ctrl_arch_->floating_base_lifting_up_manager_->initializeCoMSinusoid(
           sp_->curr_time, amp, freq);
     } else {
@@ -41,6 +42,15 @@ void WalkingInterruptLogic::processInterrupts() {
       static_cast<DoubleSupportBalance*>(
           ctrl_arch_->state_machines_[DRACO_STATES::BALANCE])
           ->switchStateButtonTrigger();
+
+      // For TOWR+
+      // YAML::Node sol =
+      // YAML::LoadFile(THIS_COM "ExperimentData/draco_one_step_sol.yaml");
+      // Eigen::VectorXd one_hot_sol_vector;
+      // myUtils::readParameter(sol, "sol", one_hot_sol_vector);
+      // sp_->one_step_sol->from_one_hot_vector(one_hot_sol_vector);
+      // sp_->planning_time = sp_->curr_time;
+
     } else {
       // std::cout << "-- Command Ignored. Please Wait for Double Support
       // Balance" << std::endl;

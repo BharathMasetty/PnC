@@ -64,17 +64,53 @@ void SwingControl::_taskUpdate() {
         state_machine_time_);
     ctrl_arch_->rfoot_trajectory_manager_->useCurrent();
 
+    // For TOWR+
+    // Eigen::Vector3d des_pos =
+    // sp_->one_step_sol->get_des_lf_pos(sp_->curr_time - sp_->planning_time);
+    // Eigen::Vector3d des_vel =
+    // sp_->one_step_sol->get_des_lf_vel(sp_->curr_time - sp_->planning_time);
+    // Eigen::Quaternion<double> des_quat =
+    // sp_->one_step_sol->get_des_lf_quat(sp_->curr_time - sp_->planning_time);
+    // Eigen::Vector3d des_ang_vel = sp_->one_step_sol->get_des_lf_ang_vel(
+    // sp_->curr_time - sp_->planning_time);
+    // ctrl_arch_->lfoot_trajectory_manager_->updateSwingFootDesired(
+    // des_pos, des_vel, des_quat, des_ang_vel);
+
   } else {
     // Set Right Swing FOot Trajectory. Hold Other foot in place.
     ctrl_arch_->rfoot_trajectory_manager_->updateSwingFootDesired(
         state_machine_time_);
     ctrl_arch_->lfoot_trajectory_manager_->useCurrent();
+
+    // For TOWR+
+    // Eigen::Vector3d des_pos =
+    // sp_->one_step_sol->get_des_rf_pos(sp_->curr_time - sp_->planning_time);
+    // Eigen::Vector3d des_vel =
+    // sp_->one_step_sol->get_des_rf_vel(sp_->curr_time - sp_->planning_time);
+    // Eigen::Quaternion<double> des_quat =
+    // sp_->one_step_sol->get_des_rf_quat(sp_->curr_time - sp_->planning_time);
+    // Eigen::Vector3d des_ang_vel = sp_->one_step_sol->get_des_rf_ang_vel(
+    // sp_->curr_time - sp_->planning_time);
+    // ctrl_arch_->rfoot_trajectory_manager_->updateSwingFootDesired(
+    // des_pos, des_vel, des_quat, des_ang_vel);
   }
 
   // =========================================================================
   // Floating Base
   // =========================================================================
   ctrl_arch_->dcm_trajectory_manager_->updateDCMTasksDesired(sp_->curr_time);
+
+  // For TOWR+
+  // Eigen::Vector3d des_com_pos =
+  // sp_->one_step_sol->get_des_com_pos(sp_->curr_time - sp_->planning_time);
+  // Eigen::Vector3d des_com_vel =
+  // sp_->one_step_sol->get_des_com_pos(sp_->curr_time - sp_->planning_time);
+  // Eigen::Quaternion<double> des_quat =
+  // sp_->one_step_sol->get_des_base_quat(sp_->curr_time - sp_->planning_time);
+  // Eigen::Vector3d des_base_ang_vel = sp_->one_step_sol->get_des_base_ang_vel(
+  // sp_->curr_time - sp_->planning_time);
+  // ctrl_arch_->dcm_trajectory_manager_->updateDCMTasksDesired(
+  // des_com_pos, des_com_vel, des_quat, des_base_ang_vel);
 }
 
 void SwingControl::oneStep() {
@@ -91,29 +127,37 @@ bool SwingControl::endOfState() {
   if (state_machine_time_ >= end_time_) {
     return true;
   } else {
-    if (state_machine_time_ >=
-        swing_time_percent_early_contact_check_ * end_time_) {
-      if (leg_side_ == (LEFT_ROBOT_SIDE)) {
-        if (fabs(sp_->l_rf[5]) >= early_contact_force_threshold_) {
-          std::cout << "early left foot contact" << std::endl;
-          std::cout << "state_machine_time_ :" << state_machine_time_ << " / "
-                    << end_time_ << std::endl;
-          myUtils::pretty_print(sp_->l_rf, std::cout, "Left Wrench");
-          return true;
-        }
-      } else {
-        if (fabs(sp_->r_rf[5]) >= early_contact_force_threshold_) {
-          std::cout << "early right foot contact" << std::endl;
-          std::cout << "state_machine_time_ :" << state_machine_time_ << " / "
-                    << end_time_ << std::endl;
-          myUtils::pretty_print(sp_->r_rf, std::cout, "Right Wrench");
-          return true;
-        }
-      }
-    }
     return false;
   }
 }
+
+// bool SwingControl::endOfState() {
+// if (state_machine_time_ >= end_time_) {
+// return true;
+//} else {
+// if (state_machine_time_ >=
+// swing_time_percent_early_contact_check_ * end_time_) {
+// if (leg_side_ == (LEFT_ROBOT_SIDE)) {
+// if (fabs(sp_->l_rf[5]) >= early_contact_force_threshold_) {
+// std::cout << "early left foot contact" << std::endl;
+// std::cout << "state_machine_time_ :" << state_machine_time_ << " / "
+//<< end_time_ << std::endl;
+// myUtils::pretty_print(sp_->l_rf, std::cout, "Left Wrench");
+// return true;
+//}
+//} else {
+// if (fabs(sp_->r_rf[5]) >= early_contact_force_threshold_) {
+// std::cout << "early right foot contact" << std::endl;
+// std::cout << "state_machine_time_ :" << state_machine_time_ << " / "
+//<< end_time_ << std::endl;
+// myUtils::pretty_print(sp_->r_rf, std::cout, "Right Wrench");
+// return true;
+//}
+//}
+//}
+// return false;
+//}
+//}
 
 // bool SwingControl::endOfState() {
 // if (state_machine_time_ >= end_time_) {
